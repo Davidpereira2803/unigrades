@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'secondpage.dart';
@@ -18,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Unversity Grades',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromARGB(255, 128, 128, 128),
+        primaryColor: const Color.fromARGB(255, 190, 110, 70),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 196, 118, 73)),
         useMaterial3: true,
       ),
@@ -94,15 +97,7 @@ void main() async {
   if (externalDir != null) {
     String externalPath = externalDir.path;
     filePath = '$externalPath/${myControllerCourse.text.toLowerCase()}.json';
-    print('External Storage Directory: $externalPath');
-
-    // You can append the desired file path to externalPath
-    print('Full File Path: $filePath');
-  } else {
-    print('Unable to get external storage directory.');
-  }
-
-
+  } else {}
 
   Map<String, dynamic> newData = {
     'course': myControllerCourse.text.toUpperCase(),
@@ -142,6 +137,7 @@ void main() async {
             TextField(
               controller: myControllerCourse,
               decoration: const InputDecoration(
+                labelText: 'Course',
                 border: OutlineInputBorder(),
                 hintText: 'Enter Course',
               ),
@@ -150,6 +146,7 @@ void main() async {
             TextField(
               controller: myControllerName,
               decoration: const InputDecoration(
+                labelText: 'Name',
                 border: OutlineInputBorder(),
                 hintText: 'Enter Name',
                 ),
@@ -158,6 +155,7 @@ void main() async {
               TextField(
                 controller: myControllerGrade,
                 decoration: const InputDecoration(
+                  labelText: 'Grade',
                   border: OutlineInputBorder(),
                   hintText: 'Enter Grade',
                 ),
@@ -165,12 +163,14 @@ void main() async {
           ],
         ),
       ),
-      floatingActionButton: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           FloatingActionButton(
             onPressed: main,
-            child: const Text('Add'),
+            tooltip: 'Add Exam',
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const Icon(Icons.add),
           ),
           FloatingActionButton(
             onPressed:(){
@@ -179,7 +179,9 @@ void main() async {
                 MaterialPageRoute(builder: (context) => const SecondPage()),
               );
             },
-            child: const Text('Dashboard'),
+            tooltip: 'Go to Dashboard',
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const Icon(Icons.dashboard),
           ),
         ],
       ),

@@ -21,6 +21,9 @@ class _SecondPageState extends State<SecondPage> {
     return MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromARGB(255, 128, 128, 128),
+        primaryColor: const Color.fromARGB(255, 190, 110, 70),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 196, 118, 73)),
+        useMaterial3: true,
        ),
       home: Scaffold(
         appBar: AppBar(
@@ -56,20 +59,24 @@ class _SecondPageState extends State<SecondPage> {
         ),
         ],
         ),
-        floatingActionButton: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+        floatingActionButton: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             FloatingActionButton(
               onPressed: (){
                 Navigator.pop(context);
                 },
-                child: const Text('Home Page')
+                tooltip: 'Go to Home Page',
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const Icon(Icons.home)
               ),
               FloatingActionButton(
                 onPressed: (){
                   loadCourseData(myControllerSelectedCourse.text);
                 },
-                child: const Icon(Icons.add),
+                tooltip: 'Get Course',
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const Icon(Icons.query_stats),
                 ),
             ]
           ),
