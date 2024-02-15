@@ -89,6 +89,43 @@ void updateJsonFile(String filePath, Map<String, dynamic> newData) {
   file.writeAsStringSync(updatedJsonString);
 }
 
+void clearTextFields(){
+  myControllerCourse.clear();
+  myControllerGrade.clear();
+  myControllerName.clear();
+}
+
+void remove() async{
+  Directory? externalDir = await getExternalStorageDirectory();
+  String filePath="";
+
+  if (externalDir != null) {
+    String externalPath = externalDir.path;
+    filePath = '$externalPath/${myControllerCourse.text.toLowerCase()}.json';
+  } else {}
+
+  String jsonString = File(filePath).readAsStringSync();
+  List<Map<String, dynamic>> jsonList = (json.decode(jsonString) as List).cast<Map<String, dynamic>>();
+
+  jsonList.removeWhere((json) => json["course"] == myControllerCourse.text.toUpperCase() && json["name"] == myControllerName.text);
+
+  String updatedJsonString = json.encode(jsonList);
+
+  File(filePath).writeAsStringSync(updatedJsonString);
+
+  clearTextFields();
+
+  showDialog(
+    context: context,
+    builder: (context) {
+      // ignore: prefer_const_constructors
+      return const AlertDialog(
+      content: Text('Exam Successfully Removed'),
+        );
+      },
+    );
+}
+
 void main() async {
 
   Directory? externalDir = await getExternalStorageDirectory();
@@ -106,11 +143,14 @@ void main() async {
   };
 
   updateJsonFile(filePath, newData);
+
+  clearTextFields();
+
   showDialog(
     context: context,
     builder: (context) {
-      return AlertDialog(
-      content: Text(filePath),
+      return const AlertDialog(
+      content: Text('Exam Successfully Added'),
         );
       },
     );
@@ -172,6 +212,12 @@ void main() async {
             backgroundColor: Theme.of(context).primaryColor,
             child: const Icon(Icons.add),
           ),
+          FloatingActionButton(
+            onPressed: remove,
+            tooltip: 'Remove Exam',
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const Icon(Icons.remove),
+            ),
           FloatingActionButton(
             onPressed:(){
               Navigator.push(

@@ -16,6 +16,10 @@ class _SecondPageState extends State<SecondPage> {
   final TextEditingController myControllerSelectedCourse = TextEditingController();
   List<dynamic> courseData= [];
 
+  void clearTextFields(){
+    myControllerSelectedCourse.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -95,7 +99,7 @@ class _SecondPageState extends State<SecondPage> {
       String jsonData = File(filePath).readAsStringSync();
 
       List<dynamic> data = json.decode(jsonData);
-
+    
       setState(() {
         courseData = data;
       });
@@ -104,6 +108,7 @@ class _SecondPageState extends State<SecondPage> {
         print('Error loading data: $e');
       }
     }
+    clearTextFields();
   }
 
   @override
