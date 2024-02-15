@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Unversity Grades',
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 128, 128, 128),
-        primaryColor: const Color.fromARGB(255, 190, 110, 70),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 196, 118, 73)),
+        scaffoldBackgroundColor: Color.fromARGB(230, 175, 175, 175),
+        primaryColor: const Color.fromARGB(200, 180, 37, 37),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(200, 180, 37, 37)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'University Grades'),
@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 190, 110, 70),
+        backgroundColor: const Color.fromARGB(220, 180, 37, 37),
         title: Text(widget.title),
       ),
       body:
@@ -218,6 +218,7 @@ void main() async {
             backgroundColor: Theme.of(context).primaryColor,
             child: const Icon(Icons.remove),
             ),
+            
           FloatingActionButton(
             onPressed:(){
               Navigator.push(
@@ -230,6 +231,7 @@ void main() async {
             child: const Icon(Icons.dashboard),
           ),
         ],
+
       ),
     );
   }

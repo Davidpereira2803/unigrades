@@ -24,14 +24,14 @@ class _SecondPageState extends State<SecondPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(255, 128, 128, 128),
-        primaryColor: const Color.fromARGB(255, 190, 110, 70),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 196, 118, 73)),
+        scaffoldBackgroundColor: const Color.fromARGB(230, 175, 175, 175),
+        primaryColor: const Color.fromARGB(200, 180, 37, 37),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(200, 180, 37, 37)),
         useMaterial3: true,
        ),
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 190, 110, 70),
+          backgroundColor: const Color.fromARGB(220, 180, 37, 37),
           title: const Text('Grade Dashboard'),
         ),
         body: Column(
