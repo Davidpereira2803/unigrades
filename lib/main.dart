@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'secondpage.dart';
+import 'pages/secondpage.dart';
+import 'pages/settings.dart';
+import 'pages/profile.dart';
 import 'dart:convert';
 import 'dart:io';
 
@@ -19,9 +21,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Unversity Grades',
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(230, 175, 175, 175),
+        scaffoldBackgroundColor: const Color.fromARGB(230, 175, 175, 175),
         primaryColor: const Color.fromARGB(200, 180, 37, 37),
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(200, 180, 37, 37)),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(200, 180, 37, 37)),
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'University Grades'),
@@ -47,6 +49,29 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(220, 180, 37, 37),
         title: Text(widget.title),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: (){
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const Profile()),
+              );
+            },
+            icon: const Icon(Icons.person),
+            tooltip: 'Profile',
+            ),
+        ],
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const Settings()),
+            );
+          },
+          icon: const Icon(Icons.menu),
+          tooltip: 'Menu Icon',
+        ),
       ),
       body:
         const MyCustomForm(),
@@ -231,7 +256,6 @@ void main() async {
             child: const Icon(Icons.dashboard),
           ),
         ],
-
       ),
     );
   }
