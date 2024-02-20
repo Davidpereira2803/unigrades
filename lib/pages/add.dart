@@ -2,51 +2,35 @@
 
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:unigrades/pages/add.dart';
-import 'pages/secondpage.dart';
-import 'pages/settings.dart';
-import 'pages/profile.dart';
+import 'package:unigrades/main.dart';
+import 'secondpage.dart';
+import 'settings.dart';
+import 'profile.dart';
 import 'dart:convert';
 import 'dart:io';
 
-void main() {
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Unversity Grades',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color.fromARGB(230, 175, 175, 175),
-        primaryColor: const Color.fromARGB(200, 180, 37, 37),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(200, 180, 37, 37)),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'University Grades'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class AddPage extends StatefulWidget {
+  const AddPage({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<AddPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<AddPage> {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
+    return MaterialApp(
+      theme: ThemeData(
+                scaffoldBackgroundColor: const Color.fromARGB(230, 175, 175, 175),
+        primaryColor: const Color.fromARGB(200, 180, 37, 37),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(200, 180, 37, 37)),
+        useMaterial3: true,
+      ),
+    home: Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(220, 180, 37, 37),
         title: Text(widget.title),
@@ -75,20 +59,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body:
-        const MyCustomForm(),
-      );
+        const AddForm(),
+      )
+  );
   }
 }
 
 
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+class AddForm extends StatefulWidget {
+  const AddForm({super.key});
 
   @override
-  State<MyCustomForm> createState() => _MyCustomFormState();
+  State<AddForm> createState() => _AddFormState();
 }
 
-class _MyCustomFormState extends State<MyCustomForm> {
+class _AddFormState extends State<AddForm> {
 
   final TextEditingController myControllerName = TextEditingController();
   final TextEditingController myControllerGrade = TextEditingController();
@@ -233,6 +218,18 @@ void main() async {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           FloatingActionButton(
+            onPressed: main,
+            tooltip: 'Add Exam',
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const Icon(Icons.add),
+          ),
+          FloatingActionButton(
+            onPressed: remove,
+            tooltip: 'Remove Exam',
+            backgroundColor: Theme.of(context).primaryColor,
+            child: const Icon(Icons.remove),
+            ),
+          FloatingActionButton(
             onPressed:(){
               Navigator.push(
                 context,
@@ -247,12 +244,12 @@ void main() async {
             onPressed:(){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const AddPage(title: 'Edit Exams',)),
+                MaterialPageRoute(builder: (context) => const MyApp()),
               );
             },
-            tooltip: 'Add/Delete Exams',
+            tooltip: 'Go to Home Page',
             backgroundColor: Theme.of(context).primaryColor,
-            child: const Icon(Icons.add),
+            child: const Icon(Icons.home),
           ),
         ],
       ),
